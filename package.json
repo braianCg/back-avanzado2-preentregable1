@@ -1,5 +1,16 @@
 {
+  "name": "back-avanzado2-preentregable1",
+  "version": "1.0.0",
+  "description": "Backend para el preentregable 1 de la materia Avanzado 2",
+  "main": "./src/app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch ./src/app.js"
+  },
   "dependencies": {
-    "express": "^5.1.0"
+    "expres": "^0.0.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.13.1"
   }
 }

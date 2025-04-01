@@ -1,25 +1,27 @@
-import { userModel } from '../models/use.model.js';
+import { userModel } from "../models/use.model.js";
+
 
 class UserDao {
 
-async getAll(){
-return await userModel.find;
-}
-async getOne(query){
-    return await userModel.find(query);
-}
+    async getAll() {
+        return await userModel.find;
+    }
 
-async create(data){
-    return await userModel.create(data);
-}
+    async getOne(query) {
+        return await userModel.find(query);
+    }
 
-async update(id, data){
-    return await userModel.findByIdupdate(id, data, {new: true});
-}
+    async create(data) {
+        return await userModel.create(data);
+    }
 
-async remove(id){
-return await userModel.findByIdAndDelete(id);
-}
+    async update(id, data) {
+        return await userModel.findByIdAndUpdate(id, data, { new: true });
+    }
+
+    async remove(id) {
+        return await userModel.findByIdAndDelete(id);
+    }
 
 }
 
