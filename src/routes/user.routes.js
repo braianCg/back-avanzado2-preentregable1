@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { userDao } from "../persistence/mongo/dao/user.dao.js";
-//import { userExist } from "../middlewares/existUser.middleware.js";
+import { userExist } from "../middlewares/existUser.middleware.js";
 
 const router = Router();
 
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-/*router.get("/:id", userExist, async (req, res) => {
+router.get("/:id", userExist, async (req, res) => {
     try {
         const user = await userDao.getOne({ _id: req.params.id })
         res.status(200).json({ status: "ok", user });
@@ -53,6 +53,6 @@ router.put("/:id", userExist, async (req, res) => {
         console.log(error);
         res.status(500).json({ status: "error", message: "Internal Server Error" });
     }
-});*/
+});
 
 export default router;

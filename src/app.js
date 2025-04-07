@@ -1,19 +1,16 @@
-import express from 'express';
-import { connectMongoDB } from './config/mongodb-config.js';
-import router from './routes/router.js';
-
+import express from "express";
+import passport from "passport";
+import passportConfig from "./config/passport/passport.js";
+import authRoutes from "./routes/auth.routes.js";
+import protectedRoutes from "./routes/protectedRoutes.js";
 
 const app = express();
 
-connectMongoDB();
-
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
 
+app.use("/auth", authRoutes);
+app.use("/api", protectedRoutes);
 
-app.use("/api", router);
-
-app.listen(8080, () => {
-    console.log('Server is running on port 8080');
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));

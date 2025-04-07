@@ -4,7 +4,7 @@ import { userModel } from "../models/use.model.js";
 class UserDao {
 
     async getAll() {
-        return await userModel.find;
+        return await userModel.find();
     }
 
     async getOne(query) {
