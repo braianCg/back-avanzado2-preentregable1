@@ -1,16 +1,34 @@
-import express from "express";
-import passport from "passport";
-import passportConfig from "./config/passport/passport.js";
-import authRoutes from "./routes/auth.routes.js";
-import protectedRoutes from "./routes/protectedRoutes.js";
+import express from 'express';
+import envsConfig from './config/envs.config.js';
+import { connectMongoDB } from './config/nomgoDB.config.js';
+import routes from './routes/index.js';
+import cookieParser from 'cookie-parser';
+import passport from "./config/passport/passport.config.js";
+import cors from "cors";
 
 const app = express();
 
+connectMongoDB();
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(express.static("public"));
+
+
+app.use(cookieParser());
+
 app.use(passport.initialize());
 
-app.use("/auth", authRoutes);
-app.use("/api", protectedRoutes);
+app.use(cors());
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
+app.use("/api", routes);
+
+app.use((req, res) => {
+    res.status(404).json({ error: "Recurso no encontrado" });
+});
+
+app.listen(envsConfig.PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${envsConfig.PORT}`);
+
+})
